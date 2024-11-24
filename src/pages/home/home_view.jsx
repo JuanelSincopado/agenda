@@ -1,15 +1,27 @@
+import { useNavigate } from "react-router-dom";
 import data from "../../data/data";
 import HeaderHome from "./components/header";
 import "./css/home.css";
 
 const HomeView = () => {
+  const navigate = useNavigate();
+
+  const handleClick = (id) => {
+    navigate(`/details/${id}`);
+  };
+
   return (
     <div className="background-container">
-      <div className="overlay"></div>
-      <div className="content">
+      <img
+        className="z-10 w-full absolute top-0 left-0 h-full object-cover"
+        src="images/image-bg.png"
+        alt="bg"
+      />
+      <div className="overlay z-20"></div>
+      <div className="content z-30 relative">
         <HeaderHome />
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 p-5">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 p-5 ">
           {data.map((item) => (
             <div
               key={item.id}
@@ -18,6 +30,7 @@ const HomeView = () => {
                 backgroundColor: item.color,
                 height: item.height,
               }}
+              onClick={() => handleClick(item.id)}
             >
               <p className="text-center">{item.text}</p>
               <img
